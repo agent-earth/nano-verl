@@ -1,0 +1,36 @@
+model:
+  name: Qwen/Qwen3.5-0.8B
+  dtype: bf16
+  gradient_checkpointing: true
+
+train:
+  micro_batch_size: 4
+  gradient_accumulation_steps: 1
+  learning_rate: 5.0e-6
+  max_steps: 3
+  save_every: 1
+  eval_every: 3
+  output_dir: outputs/qwen_0_8b_grpo
+  seed: 42
+
+rollout:
+  n: 4
+  temperature: 1.0
+  top_p: 0.9
+  max_prompt_length: 128
+  max_response_length: 4
+  gpu_memory_utilization: 0.55
+
+algorithm:
+  kl_coef: 0.0
+  advantage_eps: 1.0e-6
+
+data:
+  train_size: 80
+  eval_size: 30
+  min_number: 0
+  max_number: 1000
+
+report:
+  enabled: true
+  max_cases: 8

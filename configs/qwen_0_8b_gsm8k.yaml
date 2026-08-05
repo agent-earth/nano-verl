@@ -1,0 +1,39 @@
+model:
+  name: Qwen/Qwen3.5-0.8B
+  dtype: bf16
+  gradient_checkpointing: true
+
+train:
+  micro_batch_size: 2
+  gradient_accumulation_steps: 1
+  learning_rate: 5.0e-7
+  max_steps: 10
+  save_every: 1
+  eval_every: 5
+  output_dir: outputs/qwen_0_8b_gsm8k_final
+  seed: 42
+
+rollout:
+  n: 8
+  temperature: 1.0
+  top_p: 0.9
+  max_prompt_length: 512
+  max_response_length: 96
+  gpu_memory_utilization: 0.55
+
+algorithm:
+  kl_coef: 0.0
+  advantage_eps: 1.0e-6
+
+data:
+  source: gsm8k
+  path: ../../../gsm8k
+  shortest_first: true
+  train_size: 80
+  eval_size: 20
+  min_number: 0
+  max_number: 0
+
+report:
+  enabled: true
+  max_cases: 8
